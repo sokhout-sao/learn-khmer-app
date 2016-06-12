@@ -1,0 +1,30 @@
+{
+  "name": "learn-khmer-app",
+  "version": "1.0.0",
+  "description": "Khmer learning language application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sokhout-sao/learn-khmer-app.git"
+  },
+  "keywords": [
+    "learn",
+    "khmer",
+    "react",
+    "redux",
+    "immutable",
+    "webpack",
+    "sok",
+    "hout",
+    "sao"
+  ],
+  "author": "Sok Hout SAO",
+  "license": "SEE LICENSE IN licence.txt",
+  "bugs": {
+    "url": "https://github.com/sokhout-sao/learn-khmer-app/issues"
+  },
+  "homepage": "https://github.com/sokhout-sao/learn-khmer-app#readme"
+}

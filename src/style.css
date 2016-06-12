@@ -1,0 +1,59 @@
+@viewport {
+   width: device-width;
+   zoom: 1;
+}
+.mainDiv>div {
+  margin: auto;
+  width: 90%;
+}
+#guessConsonant {
+  font-weight: bold;
+  font-size: 2.5em;
+}
+#rightAnswerContainerDiv {
+  visibility: hidden;
+  height: 2em;
+  padding-bottom: 1em;
+}
+#rightAnswerContainerDiv.show {
+  visibility: visible;
+}
+.rightAnswer {
+  background-color: lightgreen;
+}
+.wrongAnswer {
+  background-color: red;
+}
+ul {
+  display: table;
+  width: 100%;
+  padding: 0;
+}
+li {
+  display: table-cell;
+  width: auto;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 2em;
+}
+.kh li {
+
+}
+.fr li {
+}
+li:hover {
+  border: 1px solid black;
+}
+#rightAnswerContainer {
+  font-size: 2em;
+}
+div.buttons {
+}
+div.buttons button {
+  display:block;
+  width: 90%;
+  margin: 0.25em auto;
+  height: 60px;
+  font-size: 1em;
+}

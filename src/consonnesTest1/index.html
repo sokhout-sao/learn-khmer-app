@@ -1,0 +1,104 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Test sur les consonnes 1</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body>
+  <div class="buttons">
+    <button onclick="document.location='../'">Retour</button>
+  </div>
+  <div class="mainDiv">
+    <div>
+      <h2>Test sur les consonnes 1</h2>
+      <div>Veuillez trouver à quelle consonne correspond le son "<span id="guessConsonant"></span>".</div>
+      <div id="responseChoices">
+        <ul class="kh">
+          <li name="choice"></li>
+          <li name="choice"></li>
+          <li name="choice"></li>
+          <li name="choice"></li>
+          <li name="choice"></li>
+        </ul>
+      </div>
+      <div id="rightAnswerContainerDiv">La ou les bonnes réponses sont : <span id="rightAnswerContainer"><span></div>
+    </div>
+  </div>
+  <div class="buttons">
+    <button onclick="startGuessTest()">Encore</button>
+  </div>
+
+  <script type="text/javascript" charset="UTF-8">
+    Array.prototype.shuffle = function() {
+        var input = this;
+        for (var i = input.length-1; i >=0; i--) {
+            var randomIndex = Math.floor(Math.random()*(i+1));
+            var itemAtIndex = input[randomIndex];
+            input[randomIndex] = input[i];
+            input[i] = itemAtIndex;
+        }
+        return input;
+    };
+
+    var consonants = [
+      {fr: "Kô", kh: "ក"}, {fr: "Khô", kh: "ខ"}, {fr: "Ko", kh: "គ"}, {fr: "Kho", kh: "ឃ"}, {fr: "Ngo", kh: "ង"},
+      {fr: "Ťô", kh: "ថ"}, {fr: "Tchô", kh: "ឆ"}, {fr: "Ťo", kh: "ជ"}, {fr: "Tcho", kh: "ឈ"}, {fr: "Gno", kh: "ញ"},
+      {fr: "Dô", kh: "ដ"}, {fr: "Thô", kh: "ឋ"}, {fr: "Do", kh: "ឌ"}, {fr: "Tho", kh: "ឍ"}, {fr: "Nô", kh: "ណ"},
+      {fr: "Tô", kh: "ត"}, {fr: "Thô", kh: "ថ"}, {fr: "To", kh: "ទ"}, {fr: "Tho", kh: "ធ"}, {fr: "No", kh: "ន"},
+      {fr: "Bô", kh: "ប"}, {fr: "Phô", kh: "ផ"}, {fr: "Po", kh: "ព"}, {fr: "Pho", kh: "ភ"}, {fr: "Mo", kh: "ម"},
+      {fr: "Yo", kh: "យ"}, {fr: "Ro", kh: "រ"}, {fr: "Lo", kh: "ល"}, {fr: "Vo", kh: "វ"},
+      {fr: "Sô", kh: "ស"}, {fr: "Hô", kh: "ហ"}, {fr: "Lô", kh: "ឡ"}, {fr: "Ô", kh: "អ"}
+    ];
+
+
+    var guessSpan = document.getElementById("guessConsonant");
+    var responseChoisesDiv = document.getElementById("responseChoices");
+    var choiceContainers = document.getElementsByName("choice");
+    var rightAnswerContainerDiv = document.getElementById("rightAnswerContainerDiv");
+    var rightAnswerContainer = document.getElementById("rightAnswerContainer");
+
+    function getRandomConsonant() {
+      return consonants[Math.round(Math.random() * (consonants.length - 1))];
+    }
+
+    function getNewGuess(currentGuess) {
+      var newGuess;
+      do{
+        newGuess = getRandomConsonant();
+      } while(newGuess.fr === currentGuess.fr);
+      return newGuess;
+    }
+
+    function prepareGuess(currentGuess) {
+      rightAnswerContainerDiv.className = "hide";
+      guessSpan.innerHTML = currentGuess.fr;
+      var choices = [].concat(consonants).filter(item => item.fr !== currentGuess.fr);
+      while(choices.length > 4) {
+        choices.splice(Math.round(Math.random()*(choices.length-1)), 1);
+      }
+      choices.push(currentGuess);
+      choices.shuffle();
+      for(var i=0; i < choices.length; i++) {
+        updateChoiceContainer(choiceContainers[i], choices[i], choices, currentGuess);
+      }
+    }
+    function updateChoiceContainer(choiceContainer, consonant, choices, currentGuess) {
+      choiceContainer.innerHTML = consonant.kh;
+      choiceContainer.className = "";
+      choiceContainer.onclick = function() {
+        choiceContainer.className = consonant.fr === currentGuess.fr ? "rightAnswer" : "wrongAnswer";
+        var rightAnswers = choices.filter(item => item.fr === currentGuess.fr).map(item => item.kh);
+        rightAnswerContainer.innerHTML = rightAnswers.join();
+        rightAnswerContainerDiv.className = "show";
+      };
+    }
+    function startGuessTest() {
+      var newGuess = getNewGuess({});
+      prepareGuess(newGuess);
+    }
+    startGuessTest();
+</script>
+
+</body>
+</html>
