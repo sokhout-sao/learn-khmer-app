@@ -1,0 +1,5 @@
+{
+  "port": 80,
+  "host": "www.mydomain.com",
+  "cookieDomain": ".prod.mydomain.com"
+}

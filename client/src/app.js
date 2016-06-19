@@ -17,6 +17,8 @@ store.dispatch({
   }
 });
 
+require.context("../resources/", true, /.*/);
+
 const routes = <Route component={App}>
   <Route path="/" component={PlashScreen} />
   <Route path="/splashScreen" component={PlashScreen} />
